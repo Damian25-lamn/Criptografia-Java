@@ -1,0 +1,1 @@
+rootProject.name = "Criptografia_A1"
