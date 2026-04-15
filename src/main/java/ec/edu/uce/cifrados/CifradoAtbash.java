@@ -7,8 +7,7 @@ public class CifradoAtbash implements Cifrador{
         for(char c : texto.toCharArray()){
             if(Character.isLetter(c)){
                 char base = Character.isUpperCase(c) ? 'A' : 'a';
-                resultado.append((char) ((base =='A'?'Z':'z')-(c-base)));
-                System.out.println("");
+                resultado.append((char) ((base == 'A'?'Z':'z')-(c-base)));
             }else {
                 resultado.append(c);
             }

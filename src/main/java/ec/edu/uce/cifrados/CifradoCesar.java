@@ -3,22 +3,25 @@ package ec.edu.uce.cifrados;
 public class CifradoCesar implements Cifrador {
     private int llave;
 
-    //Constructor inicicial
+    //Constructor inicial
     public CifradoCesar(int llave) {
         this.llave = llave;
     }
 
-
     @Override
     public String cifrar(String texto) {
         StringBuilder resultado = new StringBuilder();
-        for(char c : texto.toCharArray()){
-            if(Character.isLetter(c)){
-                char base = Character.isUpperCase(c) ? 'A' : 'a';
-                resultado.append((char) base + (c- base+this.llave)%26);
-                System.out.println("");
+
+        for(int i =0; i< texto.length();i++){
+            char caracter = texto.charAt(i);
+            if(Character.isLetter(caracter)){
+                char base = Character.isUpperCase(caracter) ? 'A' : 'a';
+                // Fórmula: (posición original + desplazamiento) % 26
+                char nuevoCaracter = (char) (base + (caracter - base + llave) % 26);
+                resultado.append(nuevoCaracter);
             }else {
-                resultado.append(c);
+                //Si no es letra(espacios, numeros) se queda igual
+                resultado.append(caracter);
             }
         }
         return resultado.toString();
