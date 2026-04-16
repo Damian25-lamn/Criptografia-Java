@@ -10,20 +10,29 @@ public class CifradoCesar implements Cifrador {
 
     @Override
     public String cifrar(String texto) {
-        StringBuilder resultado = new StringBuilder();
+        return procesar(texto, this.llave);
+    }
 
-        for(int i =0; i< texto.length();i++){
+    @Override
+    public String descifrar(String texto) {
+        // Para descifrar, nos movemos en reversa (26 - llave)
+        return procesar(texto, 26 - this.llave);
+    }
+
+    // Metodo interno para no repetir el bucle for
+    private String procesar(String texto, int desplazamiento) {
+        StringBuilder resultado = new StringBuilder();
+        for (int i = 0; i < texto.length(); i++) {
             char caracter = texto.charAt(i);
-            if(Character.isLetter(caracter)){
+            if (Character.isLetter(caracter)) {
                 char base = Character.isUpperCase(caracter) ? 'A' : 'a';
-                // Fórmula: (posición original + desplazamiento) % 26
-                char nuevoCaracter = (char) (base + (caracter - base + llave) % 26);
+                char nuevoCaracter = (char) (base + (caracter - base + desplazamiento) % 26);
                 resultado.append(nuevoCaracter);
-            }else {
-                //Si no es letra(espacios, numeros) se queda igual
+            } else {
                 resultado.append(caracter);
             }
         }
         return resultado.toString();
     }
+
 }

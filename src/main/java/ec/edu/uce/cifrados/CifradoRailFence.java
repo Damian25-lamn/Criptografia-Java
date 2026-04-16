@@ -45,4 +45,43 @@ public class CifradoRailFence implements Cifrador {
 
         return resultado.toString();
     }
+
+    @Override
+    public String descifrar(String texto) {
+        if (numRieles <= 1 || texto.length() <= numRieles) return texto;
+
+        int len = texto.length();
+        // 1. Calculamos la longitud de cada riel simulando el recorrido
+        int[] longitudRieles = new int[numRieles];
+        int rielActual = 0;
+        boolean bajando = false;
+
+        for (int i = 0; i < len; i++) {
+            longitudRieles[rielActual]++;
+            if (rielActual == 0 || rielActual == numRieles - 1) bajando = !bajando;
+            rielActual += bajando ? 1 : -1;
+        }
+
+        // 2. Extraemos los pedazos de texto para cada riel
+        String[] textosRieles = new String[numRieles];
+        int indiceTexto = 0;
+        for (int i = 0; i < numRieles; i++) {
+            textosRieles[i] = texto.substring(indiceTexto, indiceTexto + longitudRieles[i]);
+            indiceTexto += longitudRieles[i];
+        }
+
+        // 3. Reconstruimos leyendo en zigzag
+        StringBuilder resultado = new StringBuilder();
+        int[] indicesLectura = new int[numRieles]; // Para saber por qué letra vamos en cada riel
+        rielActual = 0;
+        bajando = false;
+
+        for (int i = 0; i < len; i++) {
+            resultado.append(textosRieles[rielActual].charAt(indicesLectura[rielActual]++));
+            if (rielActual == 0 || rielActual == numRieles - 1) bajando = !bajando;
+            rielActual += bajando ? 1 : -1;
+        }
+
+        return resultado.toString();
+    }
 }

@@ -15,6 +15,12 @@ public class CifradoAtbash implements Cifrador{
         return resultado.toString();
 
     }
+
+    @Override
+    public String descifrar(String texto) {
+        // En Atbash, descifrar es aplicar el mismo algoritmo
+        return cifrar(texto);
+    }
     //No se necesita llave
 
 }
