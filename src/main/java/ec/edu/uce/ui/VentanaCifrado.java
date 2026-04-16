@@ -4,8 +4,6 @@ import ec.edu.uce.cifrados.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -28,9 +26,7 @@ public class VentanaCifrado extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
-        // ==========================================
         // PANEL SUPERIOR
-        // ==========================================
         JPanel panelNorte = new JPanel();
         panelNorte.setLayout(new BoxLayout(panelNorte, BoxLayout.Y_AXIS));
         panelNorte.setBorder(BorderFactory.createEmptyBorder(15, 15, 10, 15));
@@ -72,9 +68,7 @@ public class VentanaCifrado extends JFrame {
 
         add(panelNorte, BorderLayout.NORTH);
 
-        // ==========================================
         // PANEL CENTRAL
-        // ==========================================
         JPanel panelCentro = new JPanel(new GridLayout(1, 3, 10, 10));
         panelCentro.setBorder(BorderFactory.createEmptyBorder(10, 15, 15, 15));
 
@@ -100,9 +94,7 @@ public class VentanaCifrado extends JFrame {
 
         add(panelCentro, BorderLayout.CENTER);
 
-        // ==========================================
         // EVENTOS
-        // ==========================================
         txtClave.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -224,11 +216,11 @@ public class VentanaCifrado extends JFrame {
             }
 
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "⚠️ Para " + seleccion + ", la clave debe ser un NÚMERO.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Para " + seleccion + ", la clave debe ser un NÚMERO.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this, "⚠️ " + ex.getMessage(), "Atención", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "️ -* " + ex.getMessage(), "Atención", JOptionPane.WARNING_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "⚠️ Ocurrió un error inesperado al procesar.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, " Ocurrió un error inesperado al procesar.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
